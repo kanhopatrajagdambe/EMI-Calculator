@@ -1,0 +1,84 @@
+<html>
+    <head>
+        <title>EMI Calculator</title>
+        <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+        <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+        <script>
+            function GetAmount()
+            {
+                document.getElementById("txtAmount").value=document.getElementById("rangeAmount").value;
+               
+            }
+            function GetYears()
+            {
+                document.getElementById("txtYears").value=document.getElementById("rangeYears").value; 
+            }
+            function GetInterest()
+            {
+                document.getElementById("txtInterest").value=document.getElementById("rangeInterest").value;  
+            }
+                function calculate()
+                {
+                    var RsAmount=parseFloat(document.getElementById("txtAmount").value);
+                    var Interest=parseFloat(document.getElementById("txtInterest").value);
+                    var Years=parseFloat(document.getElementById("txtYears").value);
+                    var result=document.getElementById("TotalAmt");
+                    var Payment=parseFloat(RsAmount*Years/(1-(1/(1+Interest)**Years)));
+
+
+                    result.innerHTML=(`Your Yearly EMI is ${parseFloat(Payment)}`);
+                   
+                    result.className="alert alert-success fade show text-center ";
+
+                        //console.log(Payment);
+                       //document.write(Payment);
+                       result.value=Payment;   
+
+                }
+
+        </script>
+    </head>
+    <body> 
+       <div class="container-md border mt-lg-5 w-50 d-grid">
+           <h2 class="text-center mt-5">EMI Calculator</h2>
+        <div class="container   d-flex mt-lg-5">
+            <div class=" m-5 w-25">
+             <div class="input-group ">
+                 <span class="input-group-text">&#8377;</span>
+                 <input type="text" id="txtAmount" class="form-control">
+                </div>
+                 <div>
+                    <input  type="range" class="form-range" min="1000" max="10000" value="2000" id="rangeAmount" onchange="GetAmount()">
+                </div>
+            </div>
+            <div class="m-5 w-25">
+             <div class="input-group ">
+                 <span class="input-group-text">Years</span>
+                 <input type="text" id="txtYears" class="form-control">
+                </div>
+                 <div>
+                    <input onchange="GetYears()" type="range" class="form-range" min="1" max="12" value="3" id="rangeYears">
+                </div>
+            </div>
+            <div class="m-5 w-25">
+                <div class="input-group ">
+                 <span class="input-group-text">Interest</span>
+                 <input type="text" id="txtInterest" class="form-control">
+                </div>
+                 <div>
+                    <input onchange="GetInterest()" type="range" class="form-range" min="5" max="20" value="7" id="rangeInterest">
+                </div>
+            </div> 
+           </div>
+         </div>
+         
+       </div>
+       <div class="input-group d-flex flex-wrap justify-content-center">
+        <div class="m-2 d-flex input-group w-50 ">
+            <button class="btn btn-primary   " onclick="calculate()">Calculate TotalAmt</button>
+        </div>
+        <div id="TotalAmt">
+        </div>
+      </div>
+    </body>
+</html>
